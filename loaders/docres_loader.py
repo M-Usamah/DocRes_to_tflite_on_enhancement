@@ -227,8 +227,10 @@ class DocResTrainDataset(data.Dataset):
         return result_norm
 
 
-    def rgbim_transform(self,im):
-        im = im.astype(np.float)/255. 
+    def rgbim_transform(self, im):
+        if im is None:
+            return None
+        im = im.astype(np.float64)/255.  # Updated from np.float to np.float64
         im = im.transpose(2, 0, 1)
         im = torch.from_numpy(im)
         return im
